@@ -8,7 +8,7 @@ export default class Edit extends Component {
       <div class="container">
         <h1 style="text-align:center;"><a href="/blog">Konecta Blog del Desarrollador</a></h1>
         <div>
-          <h4>Editar producto {userId} </h4>
+          <h4>Editar usuario {userId} </h4>
           <hr/>
           <div class="row">
             <div class="col-md-6 mb-3">

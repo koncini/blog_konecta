@@ -16,7 +16,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('UserController');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -30,16 +30,25 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
-$routes->get('/login', 'LoginController::index');
-$routes->get('/auth', 'LoginController::auth');
-$routes->get('/blog', 'BlogController::index');
+$routes->get('/', 'UserController::index');
+$routes->get('/index', 'UserController::index');
 $routes->get('/user', 'UserController::index');
-$routes->get('/api/user/create', 'UserController::create');
+$routes->get('/login', 'UserController::index');
+$routes->get('/user/index', 'UserController::index');
+$routes->get('/user/form', 'UserController::index');
+$routes->get('/user/form', 'UserController::index');
+$routes->post('/api/user/create', 'UserController::create');
 $routes->get('/api/user/list', 'UserController::list');
 $routes->get('/api/user/get', 'UserController::get/$1');
+$routes->put('/api/user/update/(:num)','UserController::update/$1');
+$routes->delete('/api/user/delete/(:num)','UserController::delete/$1');
+//blog routes
+$routes->get('/blog', 'BlogController::index');
+$routes->post('/api/blog/create', 'BlogController::create');
 $routes->get('/api/blog/list', 'BlogController::list');
-$routes->get('/api/login/test', 'LoginController::test');
+$routes->get('/api/blog/get', 'BlogController::get');
+$routes->put('/api/blog/update/(:num)','BlogController::update/$1');
+$routes->delete('/api/blog/delete/(:num)','BlogController::delete/$1');
 
 /**
  * --------------------------------------------------------------------

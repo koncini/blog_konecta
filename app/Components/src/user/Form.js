@@ -15,7 +15,7 @@ export default class Form extends Component {
   }
 
   onClickSave() {
-    const baseUrl = "http://localhost:8083/api/product/create";
+    const baseUrl = "http://localhost:8083/blog_konecta/public/api/product/create";
 
     const datapost = {
       nombre: this.state.fieldNombre,
@@ -38,8 +38,7 @@ export default class Form extends Component {
   render() {
     return (
       <div class="container">
-        <h1 style="text-align:center;"><a href="/blog">Konecta Blog del Desarrollador</a></h1>
-        <h4>Crear Usuario</h4>
+        <h4>Registrar Usuario</h4>
         <hr />
         <div>
           <div class="row">

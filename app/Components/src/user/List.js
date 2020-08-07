@@ -12,7 +12,7 @@ export default class List extends Component {
 
   componentMounted() {
     axios
-      .get("http://localhost:8083/api/product/list")
+      .get("http://localhost:8083/blog_konecta/public/api/user/list")
       .then((response) => {
         console.log(response.data);
         this.setState({ listProduct: response.data.data });

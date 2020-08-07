@@ -13,6 +13,11 @@ class UserController extends Controller {
 		$this->request = \Config\Services::request();
 	}
 
+	public function index()
+	{
+		return view('login');
+	}
+
 	public function delete($id)
 	{
 		try {
