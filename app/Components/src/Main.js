@@ -5,6 +5,7 @@ import Edit from "./user/Edit";
 import List from "./user/List";
 import Form from "./user/Form";
 import Nav from "./Nav.js";
+import "./index.css"
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
