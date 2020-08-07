@@ -14,8 +14,8 @@ export default class Main extends Component {
       <Router>
         <main>
           <Nav />
-          <Login />
           <Switch>
+            <Route path="/blog_konecta/public/user/index" component={Login} />
             <Route path="/blog_konecta/public/user/list" component={List} />
             <Route path="/blog_konecta/public/user/edit/:id" component={Edit} />
             <Route path="/blog_konecta/public/user/form" component={Form} />

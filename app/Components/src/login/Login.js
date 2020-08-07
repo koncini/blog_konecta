@@ -1,6 +1,32 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class Login extends Component {
+  constructor () {
+    super();
+    this.state = {
+      fieldEmail: '',
+      fieldPassword: '',
+    };
+  }
+
+  onClickAuth () {
+    const baseUrl = 'http://localhost:8083/inventario_konecta/public/api/user/auth';
+
+    const datapost = {
+      nombre: this.state.fieldEmail,
+      correo: this.state.fieldPassword,
+    };
+
+    axios
+      .post(baseUrl, datapost)
+      .then((response) => {
+        alert(response.data.message);
+      })
+      .catch((error) => {
+        alert('Error 500 ' + error);
+      });
+  }
 
   render () {
     return (
@@ -10,12 +36,16 @@ export default class Login extends Component {
 
           <div className="form-group">
             <label>Correo Electronico</label>
-            <input name='email' type="email" className="form-control" placeholder="Ingrese correo"/>
+            <input name='email' type="email" className="form-control" placeholder="Ingrese correo"
+                   value={this.state.fieldEmail}
+                   onChange={(value) => this.setState({ fieldEmail: value.target.value })}/>
           </div>
 
           <div className="form-group">
-            <label>Contrasena</label>
-            <input name='password' type="password" className="form-control" placeholder="Ingrese contrasena"/>
+            <label>Contraseña</label>
+            <input name='password' type="password" className="form-control"
+                   placeholder="Ingrese contraseña" value={this.state.fieldPassword}
+                   onChange={(value) => this.setState({ fieldPassword: value.target.value })}/>
           </div>
 
           <div className="form-group">
@@ -25,9 +55,11 @@ export default class Login extends Component {
             </div>
           </div>
 
-          <button type="submit" className="btn btn-primary btn-block">Autenticar</button>
+          <button onClick={() => this.onClickAuth()} type="submit"
+                  className="btn btn-primary btn-block">Autenticar
+          </button>
           <p className="forgot-password text-right">
-            Olvido su <a href="#">contrasena?</a>
+            Olvido su <a href="#">contraseña?</a>
           </p>
         </form>
       </div>

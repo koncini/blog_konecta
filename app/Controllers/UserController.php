@@ -2,15 +2,18 @@
 
 use App\Models\UserModel;
 use CodeIgniter\Controller;
+use Config\Services;
+use Exception;
 
 class UserController extends Controller {
 
 	protected $user;
 	protected $request;
 
-	public function __construct(){
+	public function __construct()
+	{
 		$this->user = new UserModel();
-		$this->request = \Config\Services::request();
+		$this->request = Services::request();
 	}
 
 	public function index()
@@ -20,15 +23,16 @@ class UserController extends Controller {
 
 	public function delete($id)
 	{
-		try {
+		try
+		{
 			$res = $this->user->delete($id);
 			$response['res'] = $res;
-			$response['success'] = true;
+			$response['success'] = TRUE;
 			$response['message'] = "Successful delete";
 			return json_encode($response);
-		}
-		catch (\Exception $e) {
-			$response['success'] = false;
+		} catch (Exception $e)
+		{
+			$response['success'] = FALSE;
 			$response['message'] = $e->getMessage();
 			return json_encode($response);
 		}
@@ -36,19 +40,21 @@ class UserController extends Controller {
 
 	public function update($id)
 	{
-		try {
+		try
+		{
 			$json = $this->request->getJSON();
-			$update['nombre'] = $json->nombre;
-			$update['correo'] = $json->correo;
-			$update['contrasena'] = $json->contrasena;
-			$update['numero_movil'] = $json->numero_movil;
-			$update['tipo_usuario'] = $json->tipo_usuario;
-			$res = $this->user->update($id,$update);
-			$response['success'] = true;
+			$update['name'] = $json->name;
+			$update['email'] = $json->email;
+			$update['password'] = $json->password;
+			$update['phone_number'] = $json->phone_number;
+			$update['role'] = $json->role;
+			$res = $this->user->update($id, $update);
+			$response['success'] = TRUE;
 			$response['message'] = "Successful update";
 			return json_encode($response);
-		} catch (\Exception $e) {
-			$response['success'] = false;
+		} catch (Exception $e)
+		{
+			$response['success'] = FALSE;
 			$response['message'] = $e->getMessage();
 			return json_encode($response);
 		}
@@ -56,20 +62,23 @@ class UserController extends Controller {
 
 	public function get($id)
 	{
-		try {
+		try
+		{
 			$data = $this->user->find($id);
-			if ($data) {
+			if ($data)
+			{
 				$response['data'] = $data;
-				$response['success'] = true;
+				$response['success'] = TRUE;
 				$response['message'] = "Successful load";
-			}
-			else {
-				$response['success'] = false;
+			} else
+			{
+				$response['success'] = FALSE;
 				$response['message'] = "Not found data";
 			}
 			return json_encode($response);
-		} catch (\Exception $e) {
-			$response['success'] = false;
+		} catch (Exception $e)
+		{
+			$response['success'] = FALSE;
 			$response['message'] = $e->getMessage();
 			return json_encode($response);
 		}
@@ -77,14 +86,16 @@ class UserController extends Controller {
 
 	public function list()
 	{
-		try {
+		try
+		{
 			$data = $this->user->findAll();
 			$response['data'] = $data;
-			$response['success'] = true;
+			$response['success'] = TRUE;
 			$response['message'] = "Successful load";
 			return json_encode($response);
-		} catch (\Exception $e) {
-			$response['success'] = false;
+		} catch (Exception $e)
+		{
+			$response['success'] = FALSE;
 			$response['message'] = $e->getMessage();
 			return json_encode($response);
 		}
@@ -92,22 +103,42 @@ class UserController extends Controller {
 
 	public function create()
 	{
-		try {
+		helper(['form']);
+
+		try
+		{
 			$json = $this->request->getJSON();
 			// create data
-			$insert['nombre'] = $json->nombre;
-			$insert['correo'] = $json->correo;
-			$insert['contrasena'] = $json->contrasena;
-			$insert['numero_movil'] = $json->numero_movil;
-			$insert['tipo_usuario'] = $json->tipo_usuario;
-			$res = $this->user->insert($insert);
-			$response['success'] = true;
-			$response['message'] = "Successful save";
-			return json_encode($response);
-		}
-		catch (\Exception $e)
+			$data['name'] = $json->name;
+			$data['email'] = $json->email;
+			$data['password'] = $json->password;
+			$data['password_confirm'] = $json->password_confirm;
+			$data['phone_number'] = $json->phone_number;
+			$data['role'] = $json->role;
+
+			if ($this->request->getMethod() == 'post')
+			{
+				$rules = [
+					'email' => 'required|min_length[6]|max_length[50]|valid_email|is_unique[users.email]',
+					'password' => 'required|min_length[8]|max_length[255]',
+					'password_confirm' => 'matches[password]'
+				];
+
+				if ( ! $this->validate($rules))
+				{
+					$data['validation'] = $this->validator;
+				} else
+				{
+					unset($data['password_confirm']);
+					$res = $this->user->insert($data);
+					$response['success'] = TRUE;
+					$response['message'] = "Usuario Creado";
+					return json_encode($response);
+				}
+			}
+		} catch (Exception $e)
 		{
-			$response['success'] = false;
+			$response['success'] = FALSE;
 			$response['message'] = $e->getMessage();
 			return json_encode($response);
 		}
