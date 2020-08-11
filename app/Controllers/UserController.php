@@ -124,7 +124,7 @@ class UserController extends Controller {
 					'password_confirm' => 'matches[password]'
 				];
 
-				if ( ! $this->validate($rules))
+				if ($this->validate($rules))
 				{
 					$data['validation'] = $this->validator;
 				} else
@@ -141,6 +141,35 @@ class UserController extends Controller {
 			$response['success'] = FALSE;
 			$response['message'] = $e->getMessage();
 			return json_encode($response);
+		}
+	}
+
+	public function auth(){
+		$json = $this->request->getJSON();
+		// create data
+		$data['email'] = $json->email;
+		$data['password'] = $json->password;
+
+		if ($this->request->getMethod() == 'post')
+		{
+			$rules = [
+				'email' => 'required|min_length[6]|max_length[50]|valid_email|is_unique[users.email]',
+				'password' => 'required|min_length[8]|max_length[255]|validateUser[email,password]',
+			];
+
+			$errors = [
+				'password'  => [
+					'validateUser' => 'Correo o contraseña no coinciden'
+				]
+			];
+
+			if ($this->validate($rules, $errors))
+			{
+				$data['validation'] = $this->validator;
+			} else
+			{
+
+			}
 		}
 	}
 

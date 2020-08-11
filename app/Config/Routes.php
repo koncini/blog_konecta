@@ -36,7 +36,7 @@ $routes->get('/user', 'UserController::index');
 $routes->get('/login', 'UserController::index');
 $routes->get('/user/index', 'UserController::index');
 $routes->get('/user/form', 'UserController::index');
-$routes->get('/user/form', 'UserController::index');
+$routes->get('/user/auth', 'UserController::auth');
 $routes->post('/api/user/create', 'UserController::create');
 $routes->get('/api/user/list', 'UserController::list');
 $routes->get('/api/user/get', 'UserController::get/$1');
