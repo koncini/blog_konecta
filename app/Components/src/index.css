@@ -4,9 +4,7 @@
     box-sizing: border-box;
 }
 body {
-    background: #1C8EF9 !important;
-    min-height: 100vh;
-    display: flex;
+    background: #D3D3D3 !important;
     font-weight: 400;
     font-family: 'Fira Sans', sans-serif;
 }

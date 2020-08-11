@@ -26,8 +26,7 @@ export default class Form extends Component {
       role: this.state.fieldRole
     };
 
-    axios.post(baseUrl, datapost)
-    .then((response) => {
+    axios.post(baseUrl, datapost).then((response) => {
       alert(response.data.message);
     }).catch((error) => {
       alert('Error 500 ' + error);
@@ -36,7 +35,7 @@ export default class Form extends Component {
 
   render() {
     return (
-        <div class="container">
+        <div>
           <h4>Registrar Usuario</h4>
           <hr/>
           <div>

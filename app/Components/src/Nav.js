@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default class Nav extends Component {
   render() {
     return (
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a className="navbar-brand" href="/blog_konecta/public/user/index">Blog del Desarrollador</a>
         <div class="collapse navbar-collapse" id="navbarsExample09">
           <ul class="navbar-nav mr-auto">
