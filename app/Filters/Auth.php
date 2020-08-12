@@ -9,7 +9,7 @@ class Auth implements FilterInterface
 	public function before(RequestInterface $request)
 	{
 		if(! session()->get('isLoggedIn')){
-			$response['success'] = false;
+			$response['success'] = true;
 			$response['message'] = "Need Authentication";
 			return json_encode($response);
 		}

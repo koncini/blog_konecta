@@ -8,9 +8,9 @@ class NoAuth implements FilterInterface
 {
 	public function before(RequestInterface $request)
 	{
-		if(! session()->get('isLoggedIn')){
-			$response['success'] = false;
-			$response['message'] = "Need Authentication";
+		if(session()->get('isLoggedIn')){
+			$response['success'] = true;
+			$response['message'] = "Already Authenticated";
 			return json_encode($response);
 		}
 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import LoginNav from '../LoginNav';
 import {Redirect} from 'react-router';
 
 export default class Login extends Component {
@@ -28,6 +28,7 @@ export default class Login extends Component {
         this.setState({isSignedUp: true});
       }
     }).catch((error) => {
+      console.log(error.response);
       alert(error);
     });
   }
@@ -38,26 +39,8 @@ export default class Login extends Component {
     } else {
       return (
           <div>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-              <a className="navbar-brand"
-                 href="/blog_konecta/public/user/index">Blog
-                del Desarrollador</a>
-              <div className="collapse navbar-collapse" id="navbarsExample09">
-                <ul className="navbar-nav mr-auto">
-                  <li className="nav-item">
-                    <Link class="nav-link" to="/blog_konecta/public/user/index">
-                      Ingresar
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link class="nav-link" to="/blog_konecta/public/user/form">
-                      Registrarse
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </nav>
 
+            <LoginNav />
             <h3>Log In</h3>
             <hr/>
             <div>

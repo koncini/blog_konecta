@@ -3,6 +3,7 @@
 * {
     box-sizing: border-box;
 }
+
 body {
     background: #D3D3D3 !important;
     font-weight: 400;
@@ -20,7 +21,6 @@ body, html, .App, #root, .auth-wrapper {
 }
 
 .auth-wrapper {
-    display: flex;
     justify-content: center;
     flex-direction: column;
     text-align: left;

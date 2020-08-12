@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import BlogNav from '../BlogNav';
 import {Link} from 'react-router-dom';
 import {Redirect} from 'react-router';
 
@@ -19,6 +20,7 @@ export default class ListPost extends Component {
           this.setState({listPost: response.data.data});
         }).
         catch((error) => {
+          console.log(error);
           alert('Error 500 ' + error);
         });
   }
@@ -31,8 +33,29 @@ export default class ListPost extends Component {
           }
         }).
         catch((error) => {
+          console.log(error);
           alert('Error 500 ' + error);
         });
+  }
+
+  onClickDelete (i, id) {
+    var yes = confirm('¿Realmente desea eliminar este item?');
+    if (yes === true) {
+      const urlDelete = 'http://localhost:8083/blog_konecta/public/api/blog/delete/' + id;
+      axios.delete(urlDelete)
+      .then((response) => {
+        const res = response.data;
+        if (res.success) {
+          alert(res.message);
+          const list = this.state.listPost;
+          list.splice(i, 1);
+          this.setState({ listPost: list });
+        }
+      })
+      .catch(error => {
+        alert('Error ==> ' + error);
+      });
+    }
   }
 
   render() {
@@ -41,74 +64,30 @@ export default class ListPost extends Component {
     } else {
       return (
           <div>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-              <a className="navbar-brand"
-                 href="/blog_konecta/public/blog/list">Blog
-                del Desarrollador</a>
-              <div className="collapse navbar-collapse" id="navbarsExample09">
-                <ul className="navbar-nav mr-auto">
-                  <li className="nav-item">
-                    <Link class="nav-link" to="/blog_konecta/public/user/index">
-                      Usuario
-                    </Link>
-                  </li>
-                  <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" href="#"
-                       id="navbarDropdown" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                      Categorias
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <li>
-                        <Link class="dropdown-item"
-                              to="/blog_konecta/public/user/form">
-                          Autos
-                        </Link>
-                      </li>
-                      <li>
-                        <Link class="dropdown-item"
-                              to="/blog_konecta/public/user/form">
-                          Motos
-                        </Link>
-                      </li>
-                      <li>
-                        <Link class="dropdown-item"
-                              to="/blog_konecta/public/user/form">
-                          Botes
-                        </Link>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-                <ul className="navbar-nav my-2 my-lg-0">
-                  <li>
-                    <button
-                        onClick={() => this.onClickDeauth()}
-                        class="btn btn-outline-success my-2 my-sm-0"
-                        type="submit">
-                      Salir
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            </nav>
+            <BlogNav />
             <section>
-              <div className="card">
-                <h2>TITLE HEADING</h2>
-                <h5>Title description, Dec 7, 2017</h5>
-                <p>Some text..</p>
-                <div>
-                  <Link
-                      class="btn btn-outline-info"
-                      to={'/inventario_konecta/public/product/edit/'}
-                  >
-                    Editar
-                  </Link>
-                  <a href="#" class="btn btn-danger">
-                    Borrar
-                  </a>
-                </div>
-              </div>
+              <ul>
+                {this.state.listPost.map((data, i) => {
+                  return (
+                      <div className="card">
+                        <h2>{data.title}</h2>
+                        <h5>{data.short_text}</h5>
+                        <p>{data.long_text}</p>
+                        <div>
+                          <Link
+                              class="btn btn-outline-info"
+                              to={'/blog_konecta/public/blog/edit/' + data.id}
+                          >
+                            Editar
+                          </Link>
+                          <a onClick={() => this.onClickDelete(i, data.id)} href="#" className="btn btn-outline-danger">
+                            Borrar
+                          </a>
+                        </div>
+                      </div>
+                  );
+                })}
+              </ul>
             </section>
           </div>
       );
