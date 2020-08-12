@@ -5,7 +5,7 @@ import Edit from './user/Edit';
 import List from './user/List';
 import Form from './user/Form';
 import ListPosts from './blog/ListPost';
-import './index.css';
+// import './index.css';
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 

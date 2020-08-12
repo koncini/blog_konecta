@@ -37,6 +37,7 @@ $routes->get('/login', 'UserController::index');
 $routes->get('/user/index', 'UserController::index');
 $routes->get('/user/form', 'UserController::index');
 $routes->post('/api/user/auth', 'UserController::auth');
+$routes->post('/api/user/deauth', 'UserController::deauth');
 $routes->post('/api/user/create', 'UserController::create');
 $routes->get('/api/user/list', 'UserController::list');
 $routes->get('/api/user/get', 'UserController::get/$1');

@@ -184,8 +184,17 @@ class UserController extends Controller {
 
 	public function deauth()
 	{
-		session()->destroy();
-		return redirect()->to('/');
+		try
+		{
+			session()->destroy();
+			$response['success'] = TRUE;
+			return json_encode($response);
+		} catch (Exception $e)
+		{
+			$response['success'] = FALSE;
+			$response['message'] = $e->getMessage();
+			return json_encode($response);
+		}
 	}
 
 }

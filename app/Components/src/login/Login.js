@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import Redirect, {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import {Redirect} from 'react-router';
 
 export default class Login extends Component {
   constructor() {
@@ -24,7 +25,6 @@ export default class Login extends Component {
 
     axios.post(baseUrl, bodyFormData, header).then((response) => {
       if (response.status === 200) {
-        console.log('logueado');
         this.setState({isSignedUp: true});
       }
     }).catch((error) => {
