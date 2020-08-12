@@ -12,10 +12,6 @@ class BlogController extends Controller {
 		$this->request = \Config\Services::request();
 	}
 
-	public function index(){
-		return view('blog');
-	}
-
 	public function delete($id)
 	{
 		try {
