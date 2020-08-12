@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 export default class Form extends Component {
@@ -38,7 +39,26 @@ export default class Form extends Component {
   render() {
     return (
         <div>
-          <h4>Registrar Usuario</h4>
+          <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a className="navbar-brand"
+               href="/blog_konecta/public/user/index">Blog
+              del Desarrollador</a>
+            <div className="collapse navbar-collapse" id="navbarsExample09">
+              <ul className="navbar-nav mr-auto">
+                <li className="nav-item">
+                  <Link class="nav-link" to="/blog_konecta/public/user/index">
+                    Ingresar
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link class="nav-link" to="/blog_konecta/public/user/form">
+                    Registrarse
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <h3>Registrar Usuario</h3>
           <hr/>
           <div>
             <div class="row">
@@ -134,7 +154,7 @@ export default class Form extends Component {
               <div class="col-md-6 mb-3">
                 <button
                     onClick={() => this.onClickSave()}
-                    class="btn btn-primary btn-block"
+                    className="btn btn-primary btn-block"
                     type="submit"
                 >
                   Registrar

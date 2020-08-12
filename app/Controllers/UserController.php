@@ -18,7 +18,7 @@ class UserController extends Controller {
 
 	public function index()
 	{
-		return view('login');
+		return view('blog');
 	}
 
 	public function delete($id)
@@ -146,7 +146,7 @@ class UserController extends Controller {
 		if ($this->request->getMethod() == 'post')
 		{
 			$rules = [
-				'email' => 'required|min_length[6]|max_length[50]|valid_email|is_unique[users.email]',
+				'email' => 'required|min_length[6]|max_length[50]|valid_email',
 				'password' => 'required|min_length[8]|max_length[255]|validateUser[email,password]',
 			];
 
@@ -163,7 +163,8 @@ class UserController extends Controller {
 			{
 				$user = $this->user->where('email', $this->request->getVar('email'))->first();
 				$this->setUserSession($user);
-				return redirect()->to('/blog');
+				$response['success'] = TRUE;
+				return json_encode($response);
 			}
 		}
 	}

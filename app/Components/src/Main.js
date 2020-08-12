@@ -4,7 +4,7 @@ import Login from './login/Login';
 import Edit from './user/Edit';
 import List from './user/List';
 import Form from './user/Form';
-import Nav from './Nav.js';
+import ListPosts from './blog/ListPost';
 import './index.css';
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
@@ -14,7 +14,6 @@ export default class Main extends Component {
     return (
         <Router>
           <main>
-            <Nav/>
             <div className="auth-wrapper">
               <div className="auth-inner">
                 <Switch>
@@ -26,6 +25,8 @@ export default class Main extends Component {
                          component={Edit}/>
                   <Route path="/blog_konecta/public/user/form"
                          component={Form}/>
+                  <Route path="/blog_konecta/public/blog/list"
+                         component={ListPosts}/>
                 </Switch>
               </div>
             </div>
@@ -35,4 +36,4 @@ export default class Main extends Component {
   }
 }
 
-ReactDOM.render(<Main/>, document.getElementById('main-login'));
+ReactDOM.render(<Main/>, document.getElementById('main-blog'));

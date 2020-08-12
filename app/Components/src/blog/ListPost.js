@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 export default class ListPost extends Component {
   constructor() {
@@ -10,9 +9,9 @@ export default class ListPost extends Component {
     };
   }
 
-  componentMounted() {
+  componentDidMount() {
     axios
-      .get("http://localhost:8083/api/blog/list")
+      .get("http://localhost:8083/blog_konecta/public/api/blog/list")
       .then((response) => {
         console.log(response.data);
         this.setState({ listProduct: response.data.data });
