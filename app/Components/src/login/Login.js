@@ -13,15 +13,18 @@ export default class Login extends Component {
   onClickAuth() {
     const baseUrl = 'http://localhost:8083/inventario_konecta/public/api/user/auth';
 
-    const datapost = {
-      email: this.state.fieldEmail,
-      password: this.state.fieldPassword
-    };
+    const bodyFormData = new FormData();
 
-    axios.post(baseUrl, datapost).then((response) => {
+    bodyFormData.append('email', this.state.fieldEmail);
+    bodyFormData.append('password', this.state.fieldPassword);
+
+    const header = {'Content-Type': 'multipart/form-data'};
+
+    axios.post(baseUrl, bodyFormData, header).then((response) => {
       alert(response.data.message);
     }).catch((error) => {
-      alert('Error 500 ' + error);
+      console.log(error);
+      alert('Error ' + error);
     });
   }
 

@@ -107,15 +107,6 @@ class UserController extends Controller {
 
 		try
 		{
-			$json = $this->request->getJSON();
-			// create data
-			$data['name'] = $json->name;
-			$data['email'] = $json->email;
-			$data['password'] = $json->password;
-			$data['password_confirm'] = $json->password_confirm;
-			$data['phone_number'] = $json->phone_number;
-			$data['role'] = $json->role;
-
 			if ($this->request->getMethod() == 'post')
 			{
 				$rules = [
@@ -124,13 +115,19 @@ class UserController extends Controller {
 					'password_confirm' => 'matches[password]'
 				];
 
-				if ($this->validate($rules))
+				if ( ! $this->validate($rules))
 				{
-					$data['validation'] = $this->validator;
+					return $this->response->setStatusCode(400, json_encode($this->validator->listErrors()));
 				} else
 				{
-					unset($data['password_confirm']);
-					$res = $this->user->insert($data);
+					$newData = [
+						'name' => $this->request->getVar('name'),
+						'email' => $this->request->getVar('email'),
+						'password' => $this->request->getVar('password'),
+						'phone_number' => $this->request->getVar('phone_number'),
+						'role' => $this->request->getVar('role'),
+					];
+					$res = $this->user->insert($newData);
 					$response['success'] = TRUE;
 					$response['message'] = "Usuario Creado";
 					return json_encode($response);
@@ -144,12 +141,8 @@ class UserController extends Controller {
 		}
 	}
 
-	public function auth(){
-		$json = $this->request->getJSON();
-		// create data
-		$data['email'] = $json->email;
-		$data['password'] = $json->password;
-
+	public function auth()
+	{
 		if ($this->request->getMethod() == 'post')
 		{
 			$rules = [
@@ -158,19 +151,40 @@ class UserController extends Controller {
 			];
 
 			$errors = [
-				'password'  => [
+				'password' => [
 					'validateUser' => 'Correo o contraseña no coinciden'
 				]
 			];
 
-			if ($this->validate($rules, $errors))
+			if ( ! $this->validate($rules, $errors))
 			{
-				$data['validation'] = $this->validator;
+				return $this->response->setStatusCode(400, json_encode($this->validator->listErrors()));
 			} else
 			{
-
+				$user = $this->user->where('email', $this->request->getVar('email'))->first();
+				$this->setUserSession($user);
+				return redirect()->to('/blog');
 			}
 		}
+	}
+
+	private function setUserSession($user)
+	{
+		$data = [
+			'id' => $user['id'],
+			'name' => $user['name'],
+			'email' => $user['email'],
+			'isLoggedIn' => TRUE
+		];
+
+		session()->set($data);
+		return TRUE;
+	}
+
+	public function deauth()
+	{
+		session()->destroy();
+		return redirect()->to('/');
 	}
 
 }

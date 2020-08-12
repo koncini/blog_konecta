@@ -17,19 +17,21 @@ export default class Form extends Component {
   onClickSave() {
     const baseUrl = 'http://localhost:8083/blog_konecta/public/api/user/create';
 
-    const datapost = {
-      name: this.state.fieldName,
-      email: this.state.fieldEmail,
-      password: this.state.fieldPassword,
-      password_confirm: this.state.fieldPassword_confirm,
-      phone_number: this.state.fieldPhone_number,
-      role: this.state.fieldRole
-    };
+    const bodyFormData = new FormData();
 
-    axios.post(baseUrl, datapost).then((response) => {
+    bodyFormData.append('name', this.state.fieldName);
+    bodyFormData.append('email', this.state.fieldEmail);
+    bodyFormData.append('password', this.state.fieldPassword);
+    bodyFormData.append('password_confirm', this.state.fieldPassword_confirm);
+    bodyFormData.append('phone_number', this.state.fieldPhone_number);
+    bodyFormData.append('role', this.state.fieldRole);
+
+    const header = {'Content-Type': 'multipart/form-data'};
+
+    axios.post(baseUrl, bodyFormData, header).then((response) => {
       alert(response.data.message);
     }).catch((error) => {
-      alert('Error 500 ' + error);
+      alert(error);
     });
   }
 
@@ -120,6 +122,7 @@ export default class Form extends Component {
                         this.setState({fieldRole: value.target.value})
                     }
                 >
+                  <option value="N/A">N/A</option>
                   <option value="USER">USER</option>
                   <option value="MODERATOR">MODERATOR</option>
                   <option value="ADMIN">ADMIN</option>
