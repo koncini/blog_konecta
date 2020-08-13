@@ -31,7 +31,7 @@ class Filters extends BaseConfig
 	//     like: 'post' => ['CSRF', 'throttle'],
 	public $methods = [];
 
-	// List filter aliases and any before/after uri patterns
+	// ListUser filter aliases and any before/after uri patterns
 	// that they should run on, like:
 	//    'isLoggedIn' => ['before' => ['account/*', 'profiles/*']],
 	public $filters = [];

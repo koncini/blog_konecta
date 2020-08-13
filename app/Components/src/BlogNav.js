@@ -10,7 +10,7 @@ export default class LoginNav extends Component {
           <div className="collapse navbar-collapse" id="navbarsExample09">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <Link class="nav-link" to="/blog_konecta/public/user/list">
+                <Link class="nav-link" to="/blog_konecta/public/user/get/1">
                   Usuario
                 </Link>
               </li>

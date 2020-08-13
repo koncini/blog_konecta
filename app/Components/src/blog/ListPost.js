@@ -38,26 +38,6 @@ export default class ListPost extends Component {
         });
   }
 
-  onClickDelete (i, id) {
-    var yes = confirm('¿Realmente desea eliminar este item?');
-    if (yes === true) {
-      const urlDelete = 'http://localhost:8083/blog_konecta/public/api/blog/delete/' + id;
-      axios.delete(urlDelete)
-      .then((response) => {
-        const res = response.data;
-        if (res.success) {
-          alert(res.message);
-          const list = this.state.listPost;
-          list.splice(i, 1);
-          this.setState({ listPost: list });
-        }
-      })
-      .catch(error => {
-        alert('Error ==> ' + error);
-      });
-    }
-  }
-
   render() {
     if (this.state.isSignedUp) {
       return (<Redirect to={{pathname: '/blog_konecta/public/user/index'}}/>);
@@ -72,17 +52,14 @@ export default class ListPost extends Component {
                       <div className="card">
                         <h2>{data.title}</h2>
                         <h5>{data.short_text}</h5>
-                        <p>{data.long_text}</p>
+                        <h5>{data.creation_date}</h5>
                         <div>
                           <Link
                               class="btn btn-outline-info"
                               to={'/blog_konecta/public/blog/edit/' + data.id}
                           >
-                            Editar
+                            Ver Post
                           </Link>
-                          <a onClick={() => this.onClickDelete(i, data.id)} href="#" className="btn btn-outline-danger">
-                            Borrar
-                          </a>
                         </div>
                       </div>
                   );

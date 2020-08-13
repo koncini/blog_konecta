@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
-export default class Form extends Component {
+export default class FormUser extends Component {
   constructor() {
     super();
     this.state = {

@@ -3,7 +3,7 @@ import BlogNav from '../BlogNav';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 
-export default class List extends Component {
+export default class ListUser extends Component {
   constructor() {
     super();
     this.state = {
