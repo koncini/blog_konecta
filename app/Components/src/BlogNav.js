@@ -1,6 +1,21 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 export default class LoginNav extends Component {
+
+  onClickDeauth() {
+    axios.post('http://localhost:8083/blog_konecta/public/api/user/deauth').
+        then((response) => {
+          if (response.status === 200) {
+            this.setState({isSignedUp: false});
+          }
+        }).
+        catch((error) => {
+          console.log(error);
+          alert('Error 500 ' + error);
+        });
+  }
+
   render() {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">

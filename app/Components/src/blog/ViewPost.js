@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import BlogNav from '../BlogNav';
 import {Link} from 'react-router-dom';
 import ListPost from '../blog/ListPost';
+import BlogNav from '../BlogNav';
 
 export default class ViewPost extends Component {
 
@@ -60,32 +60,35 @@ export default class ViewPost extends Component {
 
     return (
         <section>
-          <BlogNav/>
-          <div class="container py-4">
-            <div class="card">
-              <div
-                  className="card-header bg-dark text-white">{this.state.fieldTitle}</div>
-              <div className="card-body">
-                <h2 class="card-title">{this.state.fieldShort_text}</h2>
-                <p>{this.state.fieldLong_text}</p>
-                <div>
-                  <Link
-                      class="btn btn-outline-info"
-                      to={'/blog_konecta/public/blog/edit/' + this.state.id}
-                  >
-                    Editar Post
-                  </Link>
-                  <a onClick={() => this.onClickDelete(postId)} href="#"
-                     className="btn btn-outline-danger">
-                    Borrar post
-                  </a>
+          <BlogNav />
+          <div className="rowC">
+            <div class="container py-4">
+              <div class="card">
+                <div
+                    className="card-header bg-dark text-white">{this.state.fieldTitle}</div>
+                <div className="card-body">
+                  <h2 class="card-title">{this.state.fieldShort_text}</h2>
+                  <p>{this.state.fieldLong_text}</p>
+                  <div>
+                    <Link
+                        class="btn btn-outline-info"
+                        to={'/blog_konecta/public/blog/edit/' + this.state.id}
+                    >
+                      Editar Post
+                    </Link>
+                    <a onClick={() => this.onClickDelete(postId)} href="#"
+                       className="btn btn-outline-danger">
+                      Borrar post
+                    </a>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <h8>Post # {postId} </h8>
+                  <h10>{'Creado: ' + this.state.fieldCreation_date}</h10>
                 </div>
               </div>
-              <div class="card-footer">
-                <h8>Post # {postId} </h8>
-                <h10>{'Creado: ' + this.state.fieldCreation_date}</h10>
-              </div>
             </div>
+            <ListPost/>
           </div>
         </section>
     );

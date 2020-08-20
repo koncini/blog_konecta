@@ -48,8 +48,8 @@ $routes->get('/blog', 'BlogController::index', ['filter' => 'auth']);
 $routes->post('/api/blog/create', 'BlogController::create', ['filter' => 'auth']);
 $routes->get('/api/blog/list', 'BlogController::list');
 $routes->get('/api/blog/get/(:num)', 'BlogController::get/$1');
-$routes->put('/api/blog/update/(:num)','BlogController::update/$1', ['filter' => 'auth']);
-$routes->delete('/api/blog/delete/(:num)','BlogController::delete/$1', ['filter' => 'auth']);
+$routes->put('/api/blog/update/(:num)','BlogController::update/$1');
+$routes->delete('/api/blog/delete/(:num)','BlogController::delete/$1');
 
 /**
  * --------------------------------------------------------------------
