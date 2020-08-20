@@ -45,26 +45,28 @@ export default class ListPost extends Component {
       return (
           <section>
             <BlogNav />
-            <div class="container py-4">
-              <ul class="border rounded">
-                {this.state.listPost.map((data, i) => {
-                  return (
-                      <div className="card">
-                        <h2>{data.title}</h2>
-                        <h5>{data.short_text}</h5>
-                        <h5>{data.creation_date}</h5>
-                        <div>
-                          <Link
-                              class="btn btn-outline-info"
-                              to={'/blog_konecta/public/blog/get/' + data.id}
-                          >
-                            Ver Post
-                          </Link>
+            <div className="list-wrapper">
+              <div className="list-inner">
+                <ul>
+                  {this.state.listPost.map((data, i) => {
+                    return (
+                        <div className="card">
+                          <h2>{data.title}</h2>
+                          <h5>{data.short_text}</h5>
+                          <h5>{data.creation_date}</h5>
+                          <div>
+                            <Link
+                                class="btn btn-outline-info"
+                                to={'/blog_konecta/public/blog/get/' + data.id}
+                            >
+                              Ver Post
+                            </Link>
+                          </div>
                         </div>
-                      </div>
-                  );
-                })}
-              </ul>
+                    );
+                  })}
+                </ul>
+              </div>
             </div>
           </section>
       );

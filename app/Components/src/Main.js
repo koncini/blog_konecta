@@ -20,7 +20,7 @@ export default class Main extends Component {
                      component={Login}/>
               <Route path="/blog_konecta/public/user/list"
                      component={ListUser}/>
-              <Route path="/blog_konecta/public/user/edit/:id"
+              <Route path="/blog_konecta/public/user/get/:id"
                      component={EditUser}/>
               <Route path="/blog_konecta/public/user/form"
                      component={FormUser}/>

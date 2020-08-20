@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import BlogNav from '../BlogNav';
 import axios from 'axios';
 
 export default class EditUser extends Component {
@@ -54,51 +55,54 @@ export default class EditUser extends Component {
     let userId = this.props.match.params.id;
 
     return (
-        <div class="container">
-          <div>
-            <h4>Editar usuario {userId} </h4>
-            <hr/>
+        <section>
+          <BlogNav/>
+          <div className="form-wrapper">
+            <div className="form-inner">
+              <h4>Editar usuario {userId} </h4>
+              <hr/>
 
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label>Nombre de usuario</label>
-                <input type="text" class="form-control"
-                       value={this.state.fieldName}
-                       onChange={(event) => this.setState(
-                           {fieldName: event.target.value})}/>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label>Nombre de usuario</label>
+                  <input type="text" class="form-control"
+                         value={this.state.fieldName}
+                         onChange={(event) => this.setState(
+                             {fieldName: event.target.value})}/>
+                </div>
               </div>
-            </div>
 
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label>Correo</label>
-                <input type="email" class="form-control"
-                       value={this.state.fieldEmail}
-                       onChange={(event) => this.setState(
-                           {fieldEmail: event.target.value})}/>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label>Correo</label>
+                  <input type="email" class="form-control"
+                         value={this.state.fieldEmail}
+                         onChange={(event) => this.setState(
+                             {fieldEmail: event.target.value})}/>
+                </div>
               </div>
-            </div>
 
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label>Numero movil</label>
-                <input type="text" class="form-control"
-                       value={this.state.fieldPhone_number}
-                       onChange={(event) => this.setState(
-                           {fieldPhone_number: event.target.value})}/>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label>Numero movil</label>
+                  <input type="text" class="form-control"
+                         value={this.state.fieldPhone_number}
+                         onChange={(event) => this.setState(
+                             {fieldPhone_number: event.target.value})}/>
+                </div>
               </div>
-            </div>
 
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <button onClick={() => this.onClickUpdate()}
-                        class="btn btn-primary btn-block" type="submit">
-                  Guardar
-                </button>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <button onClick={() => this.onClickUpdate()}
+                          class="btn btn-primary btn-block" type="submit">
+                    Guardar
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
     );
   }
 }
