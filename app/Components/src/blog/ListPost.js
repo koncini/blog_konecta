@@ -43,10 +43,10 @@ export default class ListPost extends Component {
       return (<Redirect to={{pathname: '/blog_konecta/public/user/index'}}/>);
     } else {
       return (
-          <div>
+          <section>
             <BlogNav />
-            <section>
-              <ul>
+            <div class="container py-4">
+              <ul class="border rounded">
                 {this.state.listPost.map((data, i) => {
                   return (
                       <div className="card">
@@ -56,7 +56,7 @@ export default class ListPost extends Component {
                         <div>
                           <Link
                               class="btn btn-outline-info"
-                              to={'/blog_konecta/public/blog/edit/' + data.id}
+                              to={'/blog_konecta/public/blog/get/' + data.id}
                           >
                             Ver Post
                           </Link>
@@ -65,8 +65,8 @@ export default class ListPost extends Component {
                   );
                 })}
               </ul>
-            </section>
-          </div>
+            </div>
+          </section>
       );
     }
   }

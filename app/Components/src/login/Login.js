@@ -39,52 +39,58 @@ export default class Login extends Component {
       return (<Redirect to={{pathname: '/blog_konecta/public/blog/list'}}/>);
     } else {
       return (
-          <div>
-
+          <section>
             <LoginNav/>
-            <h3>Log In</h3>
-            <hr/>
-            <div>
+            <div className="auth-wrapper py-5">
+              <div className="auth-inner">
 
-              <div className="form-group">
-                <label>Correo Electronico</label>
-                <input name='email' type="email" className="form-control"
-                       placeholder="Ingrese correo"
-                       value={this.state.fieldEmail}
-                       onChange={(value) => this.setState(
-                           {fieldEmail: value.target.value})}/>
-              </div>
+                <h3>Log In</h3>
+                <hr/>
+                <div>
 
-              <div className="form-group">
-                <label>Contraseña</label>
-                <input name='password' type="password" className="form-control"
-                       placeholder="Ingrese contraseña"
-                       value={this.state.fieldPassword}
-                       onChange={(value) => this.setState(
-                           {fieldPassword: value.target.value})}/>
-              </div>
+                  <div className="form-group">
+                    <label>Correo Electronico</label>
+                    <input name='email' type="email" className="form-control"
+                           placeholder="Ingrese correo"
+                           value={this.state.fieldEmail}
+                           onChange={(value) => this.setState(
+                               {fieldEmail: value.target.value})}/>
+                  </div>
 
-              <div className="form-group">
-                <div className="custom-control custom-checkbox">
-                  <input type="checkbox" className="custom-control-input"
-                         id="customCheck1"/>
-                  <label className="custom-control-label"
-                         htmlFor="customCheck1">Recordarme</label>
+                  <div className="form-group">
+                    <label>Contraseña</label>
+                    <input name='password' type="password"
+                           className="form-control"
+                           placeholder="Ingrese contraseña"
+                           value={this.state.fieldPassword}
+                           onChange={(value) => this.setState(
+                               {fieldPassword: value.target.value})}/>
+                  </div>
+
+                  <div className="form-group">
+                    <div className="custom-control custom-checkbox">
+                      <input type="checkbox" className="custom-control-input"
+                             id="customCheck1"/>
+                      <label className="custom-control-label"
+                             htmlFor="customCheck1">Recordarme</label>
+                    </div>
+                  </div>
+
+                  <button
+                      onClick={() => this.onClickAuth()}
+                      className="btn btn-primary btn-block"
+                      type="submit"
+                  >
+                    Autenticar
+                  </button>
+                  <p className="forgot-password text-right">
+                    Olvido su <a href="#">contraseña?</a>
+                  </p>
                 </div>
               </div>
 
-              <button
-                  onClick={() => this.onClickAuth()}
-                  className="btn btn-primary btn-block"
-                  type="submit"
-              >
-                Autenticar
-              </button>
-              <p className="forgot-password text-right">
-                Olvido su <a href="#">contraseña?</a>
-              </p>
             </div>
-          </div>
+          </section>
       );
     }
   }

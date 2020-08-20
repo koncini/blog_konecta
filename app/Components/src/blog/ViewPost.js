@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import axios from 'axios';
+import BlogNav from '../BlogNav';
 import {Link} from 'react-router-dom';
+import ListPost from '../blog/ListPost';
 
 export default class ViewPost extends Component {
 
@@ -11,22 +13,21 @@ export default class ViewPost extends Component {
       fieldCategory: '',
       fieldShort_text: '',
       fieldLong_text: '',
-      fieldCreation_date: '',
+      fieldCreation_date: ''
     };
   }
 
-  onClickDelete (id) {
+  onClickDelete(id) {
     var yes = confirm('¿Realmente desea eliminar este post?');
     if (yes === true) {
-      const urlDelete = 'http://localhost:8083/blog_konecta/public/api/blog/delete/' + id;
-      axios.delete(urlDelete)
-      .then((response) => {
+      const urlDelete = 'http://localhost:8083/blog_konecta/public/api/blog/delete/' +
+          id;
+      axios.delete(urlDelete).then((response) => {
         const res = response.data;
         if (res.success) {
 
         }
-      })
-      .catch(error => {
+      }).catch(error => {
         alert('Error ==> ' + error);
       });
     }
@@ -45,7 +46,7 @@ export default class ViewPost extends Component {
               fieldCategory: res.data.category,
               fieldShort_text: res.data.short_text,
               fieldLong_text: res.data.long_text,
-              fieldCreation_date: res.data.creation_date,
+              fieldCreation_date: res.data.creation_date
             });
           }
         }).
@@ -57,29 +58,36 @@ export default class ViewPost extends Component {
   render() {
     let postId = this.props.match.params.id;
 
-    return(
-      <div class="container">
-        <div>
-          <div className="card">
-            <h2>{this.state.fieldTitle}</h2>
-            <h5>{this.state.fieldCreation_date}</h5>
-            <h5>{this.state.fieldShort_text}</h5>
-            <p>{this.state.fieldLong_text}</p>
-            <div>
-              <Link
-                  class="btn btn-outline-info"
-                  to={'/blog_konecta/public/blog/edit/' + this.state.id}
-              >
-                Editar Post
-              </Link>
-              <a onClick={() => this.onClickDelete(postId)} href="#" className="btn btn-outline-danger">
-                Borrar post
-              </a>
+    return (
+        <section>
+          <BlogNav/>
+          <div class="container py-4">
+            <div class="card">
+              <div
+                  className="card-header bg-dark text-white">{this.state.fieldTitle}</div>
+              <div className="card-body">
+                <h2 class="card-title">{this.state.fieldShort_text}</h2>
+                <p>{this.state.fieldLong_text}</p>
+                <div>
+                  <Link
+                      class="btn btn-outline-info"
+                      to={'/blog_konecta/public/blog/edit/' + this.state.id}
+                  >
+                    Editar Post
+                  </Link>
+                  <a onClick={() => this.onClickDelete(postId)} href="#"
+                     className="btn btn-outline-danger">
+                    Borrar post
+                  </a>
+                </div>
+              </div>
+              <div class="card-footer">
+                <h8>Post # {postId} </h8>
+                <h10>{'Creado: ' + this.state.fieldCreation_date}</h10>
+              </div>
             </div>
           </div>
-          <h8>Post # {postId} </h8>
-        </div>
-      </div>
+        </section>
     );
   }
 }
