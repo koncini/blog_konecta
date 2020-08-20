@@ -152,7 +152,7 @@ class UserController extends Controller {
 
 			$errors = [
 				'password' => [
-					'validateUser' => 'Correo o contraseña no coinciden'
+					'validateUser' => 'Password or email does not match'
 				]
 			];
 

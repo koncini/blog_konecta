@@ -32,7 +32,9 @@ export default class FormUser extends Component {
     axios.post(baseUrl, bodyFormData, header).then((response) => {
       alert(response.data.message);
     }).catch((error) => {
-      alert(error);
+      let plainStatusText = error.response.statusText.replace(/<[^>]+>/g, '');
+      let errorMessage = plainStatusText.replace(/\\t\\n|\\n|\\t/gm, '');
+      alert(errorMessage);
     });
   }
 

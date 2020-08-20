@@ -28,8 +28,9 @@ export default class Login extends Component {
         this.setState({isSignedUp: true});
       }
     }).catch((error) => {
-      console.log(error.response);
-      alert(error);
+      let plainStatusText = error.response.statusText.replace(/<[^>]+>/g, '');
+      let errorMessage = plainStatusText.replace(/\\t\\n|\\n|\\t/gm, '');
+      alert(errorMessage);
     });
   }
 
@@ -40,7 +41,7 @@ export default class Login extends Component {
       return (
           <div>
 
-            <LoginNav />
+            <LoginNav/>
             <h3>Log In</h3>
             <hr/>
             <div>
