@@ -9,14 +9,13 @@ export default class ListPost extends Component {
     super();
     this.state = {
       listPost: [],
-      isSignedUp: false
+      isSignedUp: true
     };
   }
 
   componentDidMount() {
     axios.get('http://localhost:8083/blog_konecta/public/api/blog/list').
         then((response) => {
-          console.log(response.data);
           this.setState({listPost: response.data.data});
         }).
         catch((error) => {
@@ -26,7 +25,8 @@ export default class ListPost extends Component {
   }
 
   render() {
-    if (this.state.isSignedUp) {
+    console.log(this.state.isSignedUp);
+    if (! this.state.isSignedUp) {
       return (<Redirect to={{pathname: '/blog_konecta/public/user/index'}}/>);
     } else {
       let blogList = 'http://localhost:8083/blog_konecta/public/blog/list';
@@ -34,7 +34,7 @@ export default class ListPost extends Component {
         return (
             <section>
               <BlogNav/>
-              <div className="list-wrapper">
+              <div className="list-wrapper py-4">
                 <div className="list-inner">
                   <ul>
                     {this.state.listPost.map((data, i) => {
@@ -62,7 +62,7 @@ export default class ListPost extends Component {
       }
       return (
           <section>
-            <div className="list-wrapper">
+            <div className="list-wrappe py-4">
               <div className="list-inner">
                 <ul>
                   {this.state.listPost.map((data, i) => {

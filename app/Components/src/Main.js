@@ -6,6 +6,7 @@ import ListUser from './user/ListUser';
 import FormUser from './user/FormUser';
 import ListPosts from './blog/ListPost';
 import ViewPost from './blog/ViewPost';
+import EditPost from './blog/EditPost';
 import './index.css';
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
@@ -19,7 +20,7 @@ export default class Main extends Component {
               <Route path="/blog_konecta/public/user/index"
                      component={Login}/>
               <Route path="/blog_konecta/public/user/list"
-                     component={ListUser}/>
+                     components={ListUser}/>
               <Route path="/blog_konecta/public/user/get/:id"
                      component={EditUser}/>
               <Route path="/blog_konecta/public/user/form"
@@ -28,6 +29,8 @@ export default class Main extends Component {
                      component={ListPosts}/>
               <Route path="/blog_konecta/public/blog/get/:id"
                      component={ViewPost}/>
+              <Route path="/blog_konecta/public/blog/edit/:id"
+                     component={EditPost}/>
             </Switch>
           </main>
         </Router>
