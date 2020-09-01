@@ -9,7 +9,9 @@ class NoAuth implements FilterInterface
 	public function before(RequestInterface $request, $arguments = null)
 	{
 		if(session()->get('isLoggedIn')){
-			redirect()->to('/user/noAuth');
+			$response = service('response');
+			$response->setStatusCode(401, 'Already Authenticated');
+			return $response;
 		}
 	}
 

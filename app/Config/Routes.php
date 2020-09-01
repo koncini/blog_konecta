@@ -30,15 +30,15 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'UserController::index');
-$routes->get('/index', 'UserController::index');
-$routes->get('/user', 'UserController::index');
-$routes->get('/login', 'UserController::index');
-$routes->get('/user/index', 'UserController::index');
-$routes->get('/user/form', 'UserController::index');
-$routes->get('/user/noAuth', 'userNotAuthorized::index');
-$routes->post('/api/user/auth', 'UserController::auth', ['filter' => 'auth']);
-$routes->post('/api/user/deauth', 'UserController::deauth', ['filter' => 'noauth']);
+$routes->get('/', 'UserController::index', ['filter' => 'noauth']);
+$routes->get('/index', 'UserController::index', ['filter' => 'noauth']);
+$routes->get('/user', 'UserController::index', ['filter' => 'noauth']);
+$routes->get('/login', 'UserController::index', ['filter' => 'noauth']);
+$routes->get('/user/index', 'UserController::index', ['filter' => 'noauth']);
+$routes->get('/user/form', 'UserController::index', ['filter' => 'noauth']);
+$routes->get('/user/noAuth', 'userNotAuthorized::index', ['filter' => 'noauth']);
+$routes->post('/api/user/auth', 'UserController::auth', ['filter' => 'noauth']);
+$routes->post('/api/user/deauth', 'UserController::deauth', ['filter' => 'auth']);
 $routes->post('/api/user/create', 'UserController::create', ['filter' => 'auth']);
 $routes->get('/api/user/list', 'UserController::list', ['filter' => 'auth']);
 $routes->get('/api/user/get/(:num)', 'UserController::get/$1', ['filter' => 'auth']);

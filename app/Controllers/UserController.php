@@ -199,10 +199,4 @@ class UserController extends Controller {
 		}
 	}
 
-	public function userNotAuthorized(){
-		$response['success'] = FALSE;
-		$response['message'] = "Need Authentication";
-		return json_encode($response);
-	}
-
 }
