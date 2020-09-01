@@ -178,6 +178,7 @@ class UserController extends Controller {
 			'isLoggedIn' => TRUE
 		];
 
+		session()->sess_expiration = '1800';
 		session()->set($data);
 		return TRUE;
 	}
@@ -188,6 +189,7 @@ class UserController extends Controller {
 		{
 			session()->destroy();
 			$response['success'] = TRUE;
+			$response['message'] = "Deauth Successfully";
 			return json_encode($response);
 		} catch (Exception $e)
 		{
@@ -195,6 +197,12 @@ class UserController extends Controller {
 			$response['message'] = $e->getMessage();
 			return json_encode($response);
 		}
+	}
+
+	public function userNotAuthorized(){
+		$response['success'] = FALSE;
+		$response['message'] = "Need Authentication";
+		return json_encode($response);
 	}
 
 }

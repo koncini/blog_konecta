@@ -6,19 +6,16 @@ use CodeIgniter\Filters\FilterInterface;
 
 class Auth implements FilterInterface
 {
-	public function before(RequestInterface $request)
+	public function before(RequestInterface $request, $arguments = null)
 	{
 		if(! session()->get('isLoggedIn')){
-			$response['success'] = true;
-			$response['message'] = "Need Authentication";
-			return json_encode($response);
+			redirect()->to('/user/noAuth');
 		}
-
 	}
 
 	//--------------------------------------------------------------------
 
-	public function after(RequestInterface $request, ResponseInterface $response)
+	public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
 	{
 		// Do something here
 	}

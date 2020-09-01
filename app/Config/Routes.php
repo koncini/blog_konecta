@@ -36,20 +36,21 @@ $routes->get('/user', 'UserController::index');
 $routes->get('/login', 'UserController::index');
 $routes->get('/user/index', 'UserController::index');
 $routes->get('/user/form', 'UserController::index');
-$routes->post('/api/user/auth', 'UserController::auth');
+$routes->get('/user/noAuth', 'userNotAuthorized::index');
+$routes->post('/api/user/auth', 'UserController::auth', ['filter' => 'auth']);
 $routes->post('/api/user/deauth', 'UserController::deauth', ['filter' => 'noauth']);
-$routes->post('/api/user/create', 'UserController::create');
+$routes->post('/api/user/create', 'UserController::create', ['filter' => 'auth']);
 $routes->get('/api/user/list', 'UserController::list', ['filter' => 'auth']);
-$routes->get('/api/user/get/(:num)', 'UserController::get/$1');
+$routes->get('/api/user/get/(:num)', 'UserController::get/$1', ['filter' => 'auth']);
 $routes->put('/api/user/update/(:num)','UserController::update/$1', ['filter' => 'auth']);
 $routes->delete('/api/user/delete/(:num)','UserController::delete/$1', ['filter' => 'auth']);
 //blog routes
 $routes->get('/blog', 'BlogController::index', ['filter' => 'auth']);
 $routes->post('/api/blog/create', 'BlogController::create', ['filter' => 'auth']);
-$routes->get('/api/blog/list', 'BlogController::list');
-$routes->get('/api/blog/get/(:num)', 'BlogController::get/$1');
-$routes->put('/api/blog/update/(:num)','BlogController::update/$1');
-$routes->delete('/api/blog/delete/(:num)','BlogController::delete/$1');
+$routes->get('/api/blog/list', 'BlogController::list', ['filter' => 'auth']);
+$routes->get('/api/blog/get/(:num)', 'BlogController::get/$1', ['filter' => 'auth']);
+$routes->put('/api/blog/update/(:num)','BlogController::update/$1', ['filter' => 'auth']);
+$routes->delete('/api/blog/delete/(:num)','BlogController::delete/$1', ['filter' => 'auth']);
 
 /**
  * --------------------------------------------------------------------
