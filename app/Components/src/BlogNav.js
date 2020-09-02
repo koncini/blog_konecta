@@ -30,7 +30,7 @@ export default class LoginNav extends Component {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link class="nav-link" to="/blog_konecta/public/user/get/1">
+                <Link class="nav-link" to="/blog_konecta/public/user/get/">
                   Usuario
                 </Link>
               </li>
@@ -43,19 +43,19 @@ export default class LoginNav extends Component {
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
                     <Link class="dropdown-item"
-                          to="/blog_konecta/public/user/form">
+                          to="/blog_konecta/public/blog/list">
                       Autos
                     </Link>
                   </li>
                   <li>
                     <Link class="dropdown-item"
-                          to="/blog_konecta/public/user/form">
+                          to="/blog_konecta/public/blog/list">
                       Motos
                     </Link>
                   </li>
                   <li>
                     <Link class="dropdown-item"
-                          to="/blog_konecta/public/user/form">
+                          to="/blog_konecta/public/blog/list">
                       Botes
                     </Link>
                   </li>

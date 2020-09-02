@@ -15,7 +15,8 @@ export default class ViewPost extends Component {
       fieldShort_text: '',
       fieldLong_text: '',
       fieldCreation_date: '',
-      isDeletedPost: false
+      isDeletedPost: false,
+      isSignedUp: true
     };
   }
 
@@ -29,7 +30,12 @@ export default class ViewPost extends Component {
           this.setState({isDeletedPost: true});
         }
       }).catch(error => {
-        alert('Error ==> ' + error);
+        console.log(error.status);
+        if (error.status === 401) {
+          this.setState({isSignedUp: false});
+        } else {
+          alert('Error ==> ' + error);
+        }
       });
     }
   }
@@ -57,13 +63,16 @@ export default class ViewPost extends Component {
   }
 
   render() {
+    if (!this.state.isSignedUp) {
+      return (<Redirect to={{pathname: '/blog_konecta/public/user/index'}}/>);
+    }
     if (this.state.isDeletedPost) {
       return (<Redirect to={{pathname: '/blog_konecta/public/blog/list'}}/>);
     } else {
       let postId = this.props.match.params.id;
       return (
           <section>
-            <BlogNav />
+            <BlogNav/>
             <div className="rowC">
               <div class="container py-4">
                 <div class="card">

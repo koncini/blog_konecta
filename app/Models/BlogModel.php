@@ -18,6 +18,6 @@ class BlogModel extends Model {
 		];
 
 	protected $useTimestamps = TRUE;
-	protected $createdField = 'fecha_creacion';
-	protected $updatedField = 'fecha_actualizacion';
+	protected $createdField = 'creation_date';
+	protected $updatedField = 'update_date';
 }

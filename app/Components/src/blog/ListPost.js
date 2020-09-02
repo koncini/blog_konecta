@@ -19,21 +19,23 @@ export default class ListPost extends Component {
           this.setState({listPost: response.data.data});
         }).
         catch((error) => {
-          console.log(error);
-          alert('Error 500 ' + error);
+          if (error.status === 401) {
+            this.setState({isSignedUp: false});
+          } else {
+            alert('Error ==> ' + error);
+          }
         });
   }
 
   render() {
-    console.log(this.state.isSignedUp);
-    if (! this.state.isSignedUp) {
+    if (!this.state.isSignedUp) {
       return (<Redirect to={{pathname: '/blog_konecta/public/user/index'}}/>);
     } else {
       let blogList = 'http://localhost:8083/blog_konecta/public/blog/list';
-      if (window.location.href === blogList){
+      if (window.location.href === blogList) {
         return (
             <section>
-              <BlogNav/>
+              <BlogNav parentCallBack={this.callbackFunction}/>
               <div className="list-wrapper py-4">
                 <div className="list-inner">
                   <ul>
@@ -46,7 +48,8 @@ export default class ListPost extends Component {
                             <div>
                               <Link
                                   class="btn btn-outline-info"
-                                  to={'/blog_konecta/public/blog/get/' + data.id}
+                                  to={'/blog_konecta/public/blog/get/' +
+                                  data.id}
                               >
                                 Ver Post
                               </Link>
